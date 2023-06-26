@@ -1,25 +1,25 @@
-﻿var example1 = Example.GetInstance;
-var example2 = Example.GetInstance;
-var example3 = Example.GetInstance;
-var example4 = Example.GetInstance;
-example1.Counter += 1;
-example2.Counter += 1;
-example3.Counter += 1;
-example4.Counter += 1;
-Console.WriteLine(example4.Counter);
+var builder = WebApplication.CreateBuilder(args);
 
-class Example
+// Add services to the container.
+
+builder.Services.AddControllers();
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
 {
-    public int Counter { get; set; }
-    private Example() => Console.WriteLine("Created!"); 
-    static Example() => GetInstance = new Example();
-
-    public static Example GetInstance;
-    
-    //public static Example GetInstance()
-    //{
-    //    if (Instance == null)
-    //        Instance = new();
-    //    return Instance;
-    //}
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
