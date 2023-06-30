@@ -1,8 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 Console.WriteLine("Hello, World!");
 
-var vakifBank =  BankFactory.GetInstance(Banks.VakifBank) as VakifBank;
-var isBankasi=  BankFactory.GetInstance(Banks.IsBankasi) as IsBankasi;
+var vakifBank = BankFactory.GetInstance(Banks.VakifBank) as VakifBank;
+var isBankasi = BankFactory.GetInstance(Banks.IsBankasi) as IsBankasi;
 Console.WriteLine();
 
 public interface IBank
@@ -22,6 +22,16 @@ public class Akbank : IBank
         //if access key is valid
         Console.WriteLine("Successfully connected Akbank");
     }
+    static Akbank Instance { get; }
+    static Akbank()
+    {
+        Instance = new Akbank(new AkbankAccessInfo()
+        {
+            AccessKey = "57rT9Kp2D1vN"
+        });
+    }
+    public static Akbank GetInstance() => Instance;
+
 }
 public class VakifBank : IBank
 {
@@ -32,6 +42,13 @@ public class VakifBank : IBank
         //if userName and password is valid
         Console.WriteLine("Successfully connected VakifBank");
     }
+
+    static VakifBank Instance { get; }
+    static VakifBank()
+    {
+        Instance = new VakifBank("api4", " R#d8$P7@wD!");
+    }
+    public static VakifBank GetInstance() => Instance;
 }
 public class IsBankasi : IBank
 {
@@ -47,8 +64,14 @@ public class IsBankasi : IBank
     {
         Console.WriteLine($"Connecting to IsBankasi Service key: {Key} - pwd: {Password}");
     }
-}
 
+    static IsBankasi Instance { get; }
+    static IsBankasi()
+    {
+        Instance = new IsBankasi("a4j7s9G2k5L8p", "X6n3B9q8R2m5V");
+    }
+    public static IsBankasi GetInstance() => Instance;
+}
 
 public interface IBankFactory
 {
@@ -56,29 +79,50 @@ public interface IBankFactory
 }
 public class AkbankFactory : IBankFactory
 {
+    AkbankFactory() { }
     public IBank GetInstance()
     {
-        return new Akbank(new AkbankAccessInfo()
-        {
-            AccessKey = "57rT9Kp2D1vN"
-        });
+        return Akbank.GetInstance();
     }
+
+    static AkbankFactory Instance { get; }
+    static AkbankFactory()
+    {
+        Instance = new();
+    }
+    public static IBankFactory GetFactoryInstance() => Instance;
 }
 public class VakifBankFactory : IBankFactory
 {
+    VakifBankFactory() { }
     public IBank GetInstance()
     {
-        return new VakifBank("api4", " R#d8$P7@wD!");
+        return VakifBank.GetInstance();
     }
+    static VakifBankFactory Instance { get; }
+    static VakifBankFactory()
+    {
+        Instance = new();
+    }
+    public static IBankFactory GetFactoryInstance() => Instance;
+
 }
 public class IsBankasiFactory : IBankFactory
 {
+    IsBankasiFactory() { }
     public IBank GetInstance()
     {
-        var instance = new IsBankasi("a4j7s9G2k5L8p", "X6n3B9q8R2m5V");
+        var instance = IsBankasi.GetInstance();
         instance.ConnectToService();
         return instance;
     }
+
+    static IsBankasiFactory Instance { get; }
+    static IsBankasiFactory()
+    {
+        Instance = new();
+    }
+    public static IBankFactory GetFactoryInstance() => Instance;
 }
 
 public class BankFactory
@@ -87,9 +131,9 @@ public class BankFactory
     {
         IBankFactory bankFactory = banks switch
         {
-            Banks.Akbank => new AkbankFactory(),
-            Banks.VakifBank => new VakifBankFactory(),
-            Banks.IsBankasi => new IsBankasiFactory()
+            Banks.Akbank => AkbankFactory.GetFactoryInstance(),
+            Banks.VakifBank => VakifBankFactory.GetFactoryInstance(),
+            Banks.IsBankasi => IsBankasiFactory.GetFactoryInstance()
         };
         return bankFactory.GetInstance();
     }
