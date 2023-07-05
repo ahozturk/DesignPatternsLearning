@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FactoryMethodPattern", "Fac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FactoryMethodBankExample", "FactoryMethodBankExample\FactoryMethodBankExample.csproj", "{F8C689C7-26F6-4437-A42A-D66D7BFB6C62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractDesignPattern", "AbstractDesignPattern\AbstractDesignPattern.csproj", "{A08C0F91-5221-4D4F-96CF-21A06537E6E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractDesignPattern", "AbstractDesignPattern\AbstractDesignPattern.csproj", "{A08C0F91-5221-4D4F-96CF-21A06537E6E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFactoryDesignPatternExample", "AbstractFactoryDesignPatternExample\AbstractFactoryDesignPatternExample.csproj", "{2B98C893-AFC5-4725-98AC-BFF48CCA6344}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{A08C0F91-5221-4D4F-96CF-21A06537E6E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A08C0F91-5221-4D4F-96CF-21A06537E6E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A08C0F91-5221-4D4F-96CF-21A06537E6E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B98C893-AFC5-4725-98AC-BFF48CCA6344}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B98C893-AFC5-4725-98AC-BFF48CCA6344}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B98C893-AFC5-4725-98AC-BFF48CCA6344}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B98C893-AFC5-4725-98AC-BFF48CCA6344}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
